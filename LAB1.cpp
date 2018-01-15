@@ -12,20 +12,23 @@ class node
 { 
   public:
   int val;
-  node *next;
+  node* next;
   node();
   {
     val=0;
     next=NULL;
   }
-}head,tail;
+};
 /*
 
 */
 class SLL
 {
-  public:
+  private:
+		node* head;
+		node* tail;
   int size;
+  public:
   SLL()
   {
     head=NULL;
@@ -44,7 +47,7 @@ class SLL
 */
 void SLL::insertEnd(int data)
 {
-  node *temp1=new node();
+  node* temp1=new node;
   temp1->val=data;
   temp1->next=NULL;
   if(head==NULL)
@@ -57,6 +60,7 @@ void SLL::insertEnd(int data)
     tail->next=temp1;
     tail=temp1;
   }
+  size++;
 }
 /*
 
@@ -159,19 +163,7 @@ int SLL::deleteAt(int pos)
 }
 int SLL::countItems()
 {
-  node *traverse;
-  traverse=head;
-  if(head!=NULL)
-  {
-   while(traverse!=NULL)
-   {  
-    traverse=traverse->next;  
-    size++;
-   }
-   return size;
-  }
- else
-  return 0;
+  return size;
 }
 /*
 
