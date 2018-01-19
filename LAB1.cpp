@@ -1,207 +1,223 @@
 /*
-
-
+This program implements Singly Linked List using C++ which includes the following functions: 
+insert(int data)  
+insertAt(int pos, int data)  
+delete()
+deleteAt(int pos)
+countItems()
+display()
 */
-#include<iostream>
+
+#include <iostream>
 using namespace std;
 
-/*
-
-*/
-class node
-{ 
-  public:
-  int val;
-  node* next;
-  node();
-  {
-    val=0;
-    next=NULL;
-  }
+class Node
+{  
+   public:
+   int num;
+   Node* next;
+   Node()
+   {
+	   num=0;
+	   next=NULL;
+   }
 };
-/*
-
-*/
 class SLL
 {
-  private:
-		node* head;
-		node* tail;
-  int size;
-  public:
-  SLL()
-  {
-    head=NULL;
-    tail=NULL;
-    size=0;
-  }
-  void insertEnd(int data);
-  void insertAt(int pos, int data);
-  int deleteEnd();
-  int deleteAt(int pos);
-  int countItems();
-  void display();
+    public:
+   Node* head;
+   Node* tail;
+   int size;
+   
+   SLL()
+   {
+	   size=0;
+	   head=NULL;
+	   tail=NULL;
+   }
+	
+   
+   //Adds a new element to the end of the linked list.
+   void insert(int n)
+   {
+      Node *tmp=new Node;
+      tmp->num=n;
+      tmp->next=NULL;
+      if(head==NULL)                           // Steps to perform when the list is empty.
+      {
+         head=tmp;
+         tail=tmp;
+      }
+      else
+      {
+         tail->next=tmp;
+         tail=tail->next;
+      }
+      size++;
+   }
+	
+	
+	
+   /*
+   It includes the position at which the insertion happens. Positioning starts with 1.  
+   Example: insertAt(1, 3)inserts 3 at the first position. 
+	    It should print a statement “Linked List does not have that many elements” if the position does not exist in the linked list.
+   */  
+   void insertAt(int data, int position)
+   { Node *n=new Node;
+      n->num=data;
+     if(position>size)
+     {
+      cout<<"\n \nLinked List does not have that many elements";     
+     }     
+     else if(position==0)
+     {
+        
+      n->next=head;
+      head=n;
+      size++;
+     }
+     else 
+     {
+         Node *traverse=new Node;
+         int count=1;
+         traverse=head;
+         while(count!=position)
+         {
+          traverse=traverse->next;
+          count++;
+         }
+      n->next=traverse->next;
+      traverse->next=n;
+      size++;
+     }
+   }
+	
+	
+	
+   //Deletes the element(or node) at the position pos)
+   void deleteAt(int pos)
+   {
+      int count=0;
+      Node* temp, *temp1;
+      temp = head  ;
+      if(head==NULL)                              // Steps to perform when the list is empty.
+      {
+        cout<<"\n \nLinked List Empty !!!";
+      }
+      else if(pos == 0)
+      {
+        head = head->next;
+        delete temp;
+      }
+      else
+      {
+      while(count!= pos-1)
+      {
+         temp = temp->next;
+         count++;   
+      }
+      temp1 = temp->next;
+      temp->next = temp1->next;
+      temp1->next=NULL;
+      delete temp1;
+   }
+	   
+	   
+   //Deletes the element at the end of the list by Using the deleteAt()
+   void deleten()
+   {
+       //using deleteAt()
+	   deleteAt(size-1);
+   }
+	   
+
+   //Returns the number of items in the linked list. 
+   int countItems()
+   {
+      //using size variable
+	  return size; 
+   }
+   
+   
+	
+	
+//Displays all the elements in the linked list. Format should be followed as “1 -> 2 -> 3 -> 4 -> NULL” for a linked list holding integers in the order 1,2,3,4. 
+   void display()
+   {
+    if(head==NULL)
+      cout << "\n \nNULL \n \nThe List is empty";
+    else
+    {
+      Node *temp = head;
+      cout<<"\n \n";
+      while(temp != NULL)
+      {
+       cout << temp->num;
+       cout<<"  -->  ";
+       temp = temp->next;
+      }
+      cout<<"NULL";
+     }
+    }
 };
-/*
 
-*/
-void SLL::insertEnd(int data)
-{
-  node* temp1=new node;
-  temp1->val=data;
-  temp1->next=NULL;
-  if(head==NULL)
-  {
-    head=temp1;
-    tail=temp1;
-  }
-  else
-  {
-    tail->next=temp1;
-    tail=temp1;
-  }
-  size++;
-}
-/*
 
-*/
-void SLL::insertAt(int pos, int data)
-{
-  node *temp2=new node();
-  temp2->val=data;
-  temp2->next=NULL;
-  node *traverse;
-  traverse=head;
-  if(pos==size+1)//If to be inserted at the end
-  {
-   insertEnd(data);
-  }
-  else if(pos==1)//If to be inserted at the beginning
-  {
-   temp->next=head;
-   head=temp;
-  }
-  else if(pos>1 && pos<=size)//If to be inserted from second to the second last position
-  {
-   for(int i=1;i<pos;i++)
-   {
-     if(i==pos-1)
-     {
-       temp2->next=traverse->next;
-       traverse=temp2;
-     }
-     else
-       traverse=traverse->next;
-   }
-  }
-  else//If pos exceeds size
-  {
-   cout<<"\n \nSORRY ! ! ! Linked List does not have that many elements";
-  }
-}
-/*
 
-*/
-int SLL::deleteEnd()
-{
-  if(head==NULL)
-  { 
-   cout<<"\n \n \nThe Linked List is empty";
-   return 0;
-  }
-  node *tmp;
-  tmp=head;
-  while(tmp->next!=tail)
-  {
-    tmp=tmp->next;
-  }
-  tail=tmp;
-  node *a;
-  a=tmp->next; 
-  return a->val;
-  delete a;
-}
-/*
-
-*/
-int SLL::deleteAt(int pos)
-{
-  node *traverse;
-  traverse=head;
-  if(pos==1)//If first element to be deleted
-  {
-   head=traverse->next;
-   traverse->next==NULL;
-   return traverse->val;
-   delete traverse;
-  }
-  else if(pos>1 && pos<=size)//If  second to the last element to be deleted
-  {
-   for(int i=1;i<pos;i++)
-   {
-     if(i==pos-1)
-     {
-       node *a;
-       a=traverse->next;
-       traverse->next=a->next;
-       a->next=NULL;
-       return a->val;
-       delete a;
-     }
-     else
-       traverse=traverse->next;
-   }
-  }
-  else//If pos exceeds size
-  {
-   cout<<"\n \nSORRY ! ! ! Linked List does not have that many elements";
-   return 0;
-  }
-/*
-
-*/
-}
-int SLL::countItems()
-{
-  return size;
-}
-/*
-
-*/
-void display()
-{
-  node *traverse;
-  traverse=head;
-  if(head!=NULL)
-  {
-   cout<<"\n \n \nThe elements in the linked list are: ";
-   while(traverse!=NULL)
-   {  
-    cout<<traverse->val<<" -> ";
-    traverse=traverse->next;  
-   }
-   cout<<"NULL";
-  }
- 
- else
-  cout<<"\n \n \nThe Linked List is empty ! ! !";
-}
-/*
-
-*/
+//Main function to implement all the data structures and functions together
 int main()
 {
-    SLL l1;
-    for(int i=1;i<=8;i++)
+    int ch,x;
+    char cha;
+    int pos;
+    SLL S;
+    cout<<"\n \nPROGRAM TO USE THE CONCEPT OF LINKED LIST";
+    do 
     {
-      l1.insertEnd(i+10);
+       cout<<"\n1. Insert a node at the end \n2. Insert a node at a position specified \n3. Delete a node at the end ";
+       cout<<"\n4.Delete a node at a position specifed \n5. Count the number of items \n6.Display ";
+       cout<<"\nPlease enter your choice: ";
+       cin>>ch;
+       switch(ch)
+       {
+       case 1:
+       {
+              cout<<"\nEnter the data: ";
+              cin>>x;
+              S.insert(x);
+        }
+       case 2:
+         {     cout<<"\nEnter the data to be inserted";
+              cin>>x;
+              cout<<"\nEnter the position to insert the node";
+              cin>>pos;
+              S.insertAt(x,pos);
+          }
+      case 3:
+       {
+		 S.deleten();	       
+       }
+       case 4:
+           {   cout<<"\nEnter the position of node to be deleted ";
+              cin>>pos;
+              S.deleteAt(pos);
+	   }
+       case 5:
+          {
+		  int num=0;
+		  num=S.countItems();
+		  cout<<"\n \nThe number of items in the Linked List is: "<<num;
+	  }		       
+       case 6:
+             {
+                 S.display();
+              }
+       default:
+             { cout<<"\nWrong choice !!!!";}
     }
-    l1.insertAt(5,25);
-    int n=l1.deleteEnd();
-    cout<<"\n \n"<<n<<" has been deleted from the end";
-    n=l1.deleteAt(3);
-    cout<<"\n \n"<<n<<" has been deleted from 3rd position";
-    cout<<"\n \nThe number of items are :"<<countItems();
-    l1.display();
+    cout<<"Do you want to continue? (y/n)";
+    cin>>cha;
+    }
+    while(cha=='y' || cha=='Y');
     return 0;
- }
+}
