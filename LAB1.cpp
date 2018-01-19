@@ -24,11 +24,11 @@ class Node
 };
 class SLL
 {
-    public:
+    private:
    Node* head;
    Node* tail;
    int size;
-   
+   public:
    SLL()
    {
 	   size=0;
@@ -40,19 +40,21 @@ class SLL
    //Adds a new element to the end of the linked list.
    void insert(int n)
    {
+      
       Node *tmp=new Node;
       tmp->num=n;
       tmp->next=NULL;
       if(head==NULL)                           // Steps to perform when the list is empty.
       {
          head=tmp;
-         tail=tmp;
+         
       }
       else
       {
          tail->next=tmp;
-         tail=tail->next;
+        
       }
+      tail=tmp;
       size++;
    }
 	
@@ -64,25 +66,44 @@ class SLL
 	    It should print a statement “Linked List does not have that many elements” if the position does not exist in the linked list.
    */  
    void insertAt(int data, int position)
-   { Node *n=new Node;
-      n->num=data;
+   { 
      if(position>size)
      {
       cout<<"\n \nLinked List does not have that many elements";     
      }     
      else if(position==0)
      {
-        
+      Node *n=new Node;
+      n->num=data;  
       n->next=head;
       head=n;
       size++;
      }
-     else 
+     else if(position==n)
      {
-         Node *traverse=new Node;
-         int count=1;
-         traverse=head;
-         while(count!=position)
+      Node *tmp=new Node;
+      tmp->num=n;
+      tmp->next=NULL;
+      if(head==NULL)                           // Steps to perform when the list is empty.
+      {
+         head=tmp;
+       }
+      else
+      {
+         tail->next=tmp;
+        
+      }
+      tail=tmp;
+      size++;
+	     
+     }
+     else
+     {
+	  Node* n=new Node;
+	     n->num=data;
+	 Node* traverse=head;
+         int count=0;
+         while(count<position-1)
          {
           traverse=traverse->next;
           count++;
@@ -94,21 +115,48 @@ class SLL
    }
 	
 	
+//Deletes the element at the end of the list 
+   void deleten()
+   {
+                Node* traverse = head;
+		//goes to the 2nd last
+	        int count=0;
+		while(count<size-1)
+		{
+			traverse = traverse->next;
+			count++;
+		}
+		
+		tail = traverse;
+		traverse->next = NULL;
+		size--;
+
+   }
+	
+	
 	
    //Deletes the element(or node) at the position pos)
    void deleteAt(int pos)
    {
+      if(pos<=size)
+      {
+	      cout<<"\n \nList doesn't have that many elements";
+	      return;
+      }
       int count=0;
       Node* temp, *temp1;
       temp = head  ;
+      
       if(head==NULL)                              // Steps to perform when the list is empty.
       {
         cout<<"\n \nLinked List Empty !!!";
+	      return;
       }
       else if(pos == 0)
       {
         head = head->next;
         delete temp;
+      size--;
       }
       else
       {
@@ -121,22 +169,17 @@ class SLL
       temp->next = temp1->next;
       temp1->next=NULL;
       delete temp1;
+      size--;
    }
 	   
-	   
-   //Deletes the element at the end of the list by Using the deleteAt()
-   void deleten()
-   {
-       //using deleteAt()
-	   deleteAt(size-1);
-   }
 	   
 
    //Returns the number of items in the linked list. 
    int countItems()
    {
       //using size variable
-	  return size; 
+	  int s=size;
+	   return s; 
    }
    
    
@@ -146,7 +189,7 @@ class SLL
    void display()
    {
     if(head==NULL)
-      cout << "\n \nNULL \n \nThe List is empty";
+      cout << "\n \nNULL \n \nThe List is empty";             // Steps to perform when the list is empty.
     else
     {
       Node *temp = head;
