@@ -224,6 +224,8 @@ int main()
     int pos;
     SLL S;
     cout<<"\n \nPROGRAM TO USE THE CONCEPT OF LINKED LIST";
+	
+    //running a loop that asks continously to the user until "n" is received as an input
     do 
     {
        cout<<"\n1. Insert a node at the end \n2. Insert a node at a position specified \n3. Delete a node at the end ";
