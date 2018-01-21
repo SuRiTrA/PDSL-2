@@ -73,7 +73,7 @@ class SLL
    Example: insertAt(1, 3)inserts 3 at the first position. 
 	    It should print a statement “Linked List does not have that many elements” if the position does not exist in the linked list.
    */  
-   void SLL::insertAt(int data, int position)
+   void SLL::insertAt(int position, int data)
    { 
      if(position>size)
      {
