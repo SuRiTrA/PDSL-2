@@ -275,5 +275,3 @@ int main()
     while(cha=='y' || cha=='Y');
     return 0;
 }
-
-	   
