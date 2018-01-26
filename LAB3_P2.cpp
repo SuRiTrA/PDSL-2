@@ -13,6 +13,7 @@ using namespace std;
 
 class Node
 {
+    public:
     int data;
     Node* next;
     Node()
@@ -45,9 +46,9 @@ class CLL
 //inserts a node at the end of the circle
 void CLL::insert(int n)
 {
-    Node temp=new Node;
+    Node* temp=new Node;
     temp->data=n;
-    temp->NULL;
+    temp->next=NULL;
     if(head==NULL)
     {
         head=temp;
@@ -61,7 +62,7 @@ void CLL::insert(int n)
         tail=temp;
         tail->next=head;
     }
-    size++
+    size++;
 }
 
 
@@ -79,7 +80,7 @@ void CLL::insertAt(int position, int num)
     }
     else if(position==0)
     {
-        Node tmp;
+        Node* tmp=new Node;
         tmp->data=num;
         tmp->next=head;
         head=tmp;
@@ -87,7 +88,7 @@ void CLL::insertAt(int position, int num)
     }
     else if(position==size)
     {
-        Node *tmp=new Node;
+        Node* tmp=new Node;
         tmp->data=num;
         tmp->next=head;
         if(head==NULL)                           // Steps to perform when the list is empty.
@@ -117,10 +118,162 @@ void CLL::insertAt(int position, int num)
         size++;
     }
 }
-    
-    
+  
+  
+  
 //Deletes the element at the end of the list 
+   void CLL::deleten()
+   {
+        Node* traverse = head;                                          //goes to the 2nd last
+	    int count=0;
+		while(count<size-2)
+		{
+			traverse = traverse->next;
+			count++;
+		}
+		
+		tail = traverse;
+		traverse->next = head;
+		size--;
 
-    
+   }
+   
+   
+   
+   //Deletes the element(or node) at the position pos
+   void CLL::deleteAt(int pos)
+   {
+      if(pos>=size)
+      {
+	      cout<<"\n \nList doesn't have that many elements \n";
+	      return;
+      }
+      int count=0;
+      Node* temp, *temp1;
+      temp = head  ;
+      
+      if(head==NULL)                              // Steps to perform when the list is empty.
+      {
+        cout<<"\n \nLinked List Empty !!!";
+	      return;
+      }
+      else if(pos == 0)
+      {
+        head = head->next;
+        delete temp;
+        size--;
+      }
+      else
+      {
+      while(count!= pos-1)
+      {
+         temp = temp->next;
+         count++;   
+      }
+      temp1 = temp->next;
+      temp->next = temp1->next;
+      temp1->next=NULL;
+      delete temp1;
+      size--;
+      }
+   }
+   
+   
+//Returns the number of items in the linked list. 
+   int CLL::countItems()
+   {
+      //using size variable
+	  int s=size;
+	   return s; 
+   }
+   
+   
+//Displays all the elements in the linked list. Format should be followed as “1 -> 2 -> 3 -> 4 -> NULL” for a linked list holding integers in the order 1,2,3,4. 
+   void CLL::display()
+   {
+    if(head==NULL)
+      cout << "\n \nNULL \n \nThe List is empty";             // Steps to perform when the list is empty.
+    else
+    {
+      Node *temp = head;
+      cout<<"\n \n";
+      while(temp->next!=head)
+      {
+       cout << temp->data;
+       cout<<"  -->  ";
+       temp = temp->next;
+      }
+      cout<<temp->data<<" --> NULL \n";
+     }
+    }
 
-    
+
+
+//Main function to implement all the data structures and functions together
+int main()
+{
+    int ch,x;
+    char cha;
+    int pos;
+    CLL S;
+    cout<<"\n \nPROGRAM TO USE THE CONCEPT OF LINKED LIST";
+	
+    //running a loop that asks continously to the user until "n" is received as an input
+    do 
+    {
+       cout<<"\n1. Insert a node at the end \n2. Insert a node at a position specified \n3. Delete a node at the end ";
+       cout<<"\n4. Delete a node at a position specifed \n5. Count the number of items \n6. Display ";
+       cout<<"\nPlease enter your choice: ";
+       cin>>ch;
+       switch(ch)
+       {
+       case 1:
+       {
+              cout<<"\nEnter the data: ";
+              cin>>x;
+              S.insert(x);
+              break;
+        }
+       case 2:
+         {     cout<<"\nEnter the data to be inserted ";
+              cin>>x;
+              cout<<"\nEnter the position to insert the node ";
+              cin>>pos;
+              S.insertAt(pos,x);
+              break;
+          }
+      case 3:
+       {
+		 S.deleten();	  
+		 break;
+       }
+       case 4:
+           {   cout<<"\nEnter the position of node to be deleted ";
+              cin>>pos;
+              S.deleteAt(pos);
+              break;
+	   }
+       case 5:
+          {
+		  int num=0;
+		  num=S.countItems();
+		  cout<<"\n \nThe number of items in the Linked List is: "<<num;
+		  break;
+	  }		       
+       case 6:
+             {
+                 S.display();
+                 break;
+              }
+       default:
+             { cout<<"\nWrong choice !!!!";
+             break;}
+    }
+    cout<<"Do you want to continue? (y/n)  ";
+    cin>>cha;
+    }
+    while(cha=='y' || cha=='Y');
+    return 0;
+}
+
+	   
