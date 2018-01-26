@@ -127,9 +127,9 @@ class SLL
    void SLL::deleten()
    {
                 Node* traverse = head;
-		//goes to the 2nd last
+		//goes to the 2nd last element
 	        int count=0;
-		while(count<size-1)
+		while(count<size-2)
 		{
 			traverse = traverse->next;
 			count++;
@@ -146,7 +146,7 @@ class SLL
    //Deletes the element(or node) at the position pos)
    void SLL::deleteAt(int pos)
    {
-      if(pos<=size)
+      if(pos>=size)
       {
 	      cout<<"\n \nList doesn't have that many elements";
 	      return;
@@ -282,3 +282,4 @@ int main()
     while(cha=='y' || cha=='Y');
     return 0;
 }
+
