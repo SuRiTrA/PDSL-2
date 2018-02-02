@@ -1,5 +1,11 @@
 #include <iostream>
 #include <string.h>
+
+
+/*My program was having an issue of deprecated conversion of string to char*, hence used this */
+#pragma GCC diagnostic ignored "-Wwrite-strings"
+
+
 using namespace std;
 /*                 */
 
