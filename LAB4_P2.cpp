@@ -1,12 +1,17 @@
 #include<iostream>
 using namespace std;
 
-class node{
+/*  Program to create a queue from two stacks   */
+
+//1711140
+
+class node{                 //this is to create the node
 	public:
 	float data; 
 	node* next;
 };
-class stackll{
+class stackll               //this is the stack 1
+{   
 	public:
 	node* bottom, *top; 
 	stackll(){
@@ -16,7 +21,7 @@ class stackll{
 	void push(float data);
 	void pop();
 	void show();
-	void mkqu(node* bottom);
+	void mkqu(node* bottom);   // create stack 2 from stack 1 where the top element becomes the bottom most element
 	void dlt();
 };
 class queue{
@@ -26,7 +31,11 @@ class queue{
 	void pop();
 	void show();
 };
-int main(){
+
+//1711140
+
+
+int main(){                       //Main function to push, show, pop, show 
 	queue one;
 	cout<<"This is to implement queue using two stack"<<endl;
 	one.push();
@@ -35,8 +44,11 @@ int main(){
 	one.show();
 	return 0; 
 }
+
+//1711140
  
-void stackll::push(float data){
+void stackll::push(float data)     //function to push the data into the stack
+{    
 	node* temp =new node;
 	temp ->data = data;
 	temp->next=NULL;
@@ -49,7 +61,10 @@ void stackll::push(float data){
 		bottom =temp;
 	}
 }
-void stackll::pop(){
+
+//1711140
+
+void stackll::pop(){         //function to pop the data from the stack
 	if (bottom==NULL){
 		cout<<"This stack is empty you can't pop any more"<<endl;
 	}
@@ -65,7 +80,10 @@ void stackll::pop(){
 		delete temp;
 	}
 }
-void stackll::show(){
+
+//1711140 
+
+void stackll::show(){                        //for displaying the nodes
 	node* temp =bottom;
 	if(bottom==NULL){
 	cout<<"there is nothing to show"<<endl;
@@ -78,6 +96,9 @@ void stackll::show(){
 		cout<<temp->data<<endl;
 	}
 }
+
+//1711140
+
 void stackll::mkqu(node* bottom){ 
 		node* temp =bottom;
 		if(bottom!=NULL){
@@ -88,14 +109,15 @@ void stackll::mkqu(node* bottom){
 			push(temp->data);
 		}
 }	
-void stackll::dlt(){
+void stackll::dlt(){                           //to delete the elements from the stack
 	while(bottom!=NULL){
 		pop();
 	}	
 }
 
+//1711140
 
-void queue::push(){
+void queue::push(){                            //asks user the no. of data to be pushed and makes the stack2 from it 
 	cout<<"Number of data"<<endl;
 	int num,data;
 	cin>>num;
@@ -106,8 +128,11 @@ void queue::push(){
 	}
 	stack2.dlt();
 	stack2.mkqu(stack1.bottom);
-}	
-void queue::pop(){
+}
+
+//1711140
+
+void queue::pop(){                                       //asks the user the number of data to be deleted
 	cout<<"Number of data you want to delete:"<<endl;
 	int num;
 	cin>>num;
