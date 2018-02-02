@@ -7,13 +7,13 @@
 
 
 using namespace std;
-/*                 */
+/*   This program creates a Customer Service database via implementation of stack and queue   */
 
 
-int top, front;
+int top, front; //denotes the head of a stack and head of a queue respectively
 
 
-class Issue
+class Issue   //this stores the data related to the issue to be registered
 {
     public:
     char name[30];
@@ -23,7 +23,8 @@ class Issue
     Issue(){link=NULL;};
 };
 
-class StkPal
+class StkPal   //this class is to implement stack concept in palindrom checking
+    
 {
     public:
     char NM[30];
@@ -33,14 +34,14 @@ class StkPal
       top++;
       NM[top]  =  a;
    }
-/* delete an element in stack */
+   /* delete an element in stack */
    void pop()
    {
       top--;
    }
 }stack;
 
-class CustomerService
+class CustomerService    //this class is created to integrate and functionalise the nodes of the Issue linked list
 {
     public:
     Issue* head;
@@ -56,19 +57,20 @@ class CustomerService
 };
 
 /*Checking Palindrome Using Array STACK*/
+
 int CustomerService::chkPalindrome(char nm[30])
 {
    top=-1;
    front=0;
    char b;
-   for (int i = 0;nm[i] != '\0';i++)
+   for (int i = 0;nm[i] != '\0';i++)   //storing the name in stack class
     {
           b = nm[i];
           stack.push(b);
     }
    for (int i = 0;i < (signed)(strlen(nm) / 2);i++)
     {
-          if (stack.NM[top] == stack.NM[front])
+          if (stack.NM[top] == stack.NM[front])    //checking by using stack as well as queue concept
           {
                 stack.pop();
                 front++;
@@ -87,7 +89,7 @@ int CustomerService::chkPalindrome(char nm[30])
 }
 
 
-void CustomerService::addIssue(char nm[],long int p, char des[])
+void CustomerService::addIssue(char nm[],long int p, char des[])   //this function is to add issue and link it to a list
 {
     Issue* temp=new Issue;
     temp->ph=p;
@@ -116,7 +118,7 @@ void CustomerService::addIssue(char nm[],long int p, char des[])
     
     
 
-void CustomerService::displayIssue()
+void CustomerService::displayIssue()    //function to display the issue
 {
     Issue* iss;
     iss=head;
@@ -136,7 +138,8 @@ void CustomerService::displayIssue()
     cout<<"\n \n \n";
 }
 
-int main()
+
+int main()       //main function to test the code 
 {
     CustomerService CS;
     CS.displayIssue();
