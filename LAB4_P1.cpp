@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 
@@ -30,6 +31,96 @@ class StackLL
   void display();
 };
 
+
+
+/* Implementing Stack by Array */
+class StackArr
+{
+             int stk[20];
+             int top;
+      public:
+             StackArr()
+              {
+                top=-1;
+              }
+             void push(int x)
+              {
+                 if(top >  19)
+                       {
+                           cout <<"\n \nSTACK OVERFLOW !!!";
+                           return;
+                       }
+                 stk[++top]=x;
+                 cout <<"\nInserted " <<x<<endl;
+               }
+             void pop()
+               {
+                  if(top <0)
+                   {
+                         cout <<"\n \nSTACK UNDERFLOW !!!";
+                         return;
+                    }
+                    cout <<"\nDeleted" <<stk[top--]<<endl;
+                }
+             void display()
+               {
+                   cout<<"\n \n";
+                   if(top<0)
+                    {
+                            cout <<" EMPTY STACK !!!!";
+                            return;
+                    }
+                    for(int i=top;i>=0;i--)
+                    cout <<stk[i] <<" -> ";
+                    cout<<"NULL";
+                }
+};
+
+
+/* Implementing Queue via Array */
+class QueueArr
+{
+              int queue1[20];
+              int rear,front;
+      public:
+              QueueArr()
+                {
+                     rear=-1;
+                     front=-1;
+                }
+              void enqueue(int x)
+               {
+                   if(rear >  19)
+                    {
+                       cout <<"\nQUEUE OVERFLOW !!!";
+                       front=rear=-1;
+                       return;
+                    }
+                    queue1[++rear]=x;
+                    cout <<"\nInserted " <<x<<endl;
+               }
+              void dequeue()
+               {
+                   if(front==rear)
+                     {
+                         cout <<"\n \nUNDERFLOW !!!";
+                         return;
+                     }
+                     cout <<"\n \nDeleted " <<queue1[++front];
+                }
+              void display()
+               {
+                   cout<<"\n \n";
+                   if(rear==front)
+                     {
+                          cout <<"\n \nEMPTY !!!!";
+                          return;
+                     }
+                   for(int i=front+1;i<=rear;i++)
+                   cout <<queue1[i]<<" -> ";
+                   cout<<"NULL";
+               }
+};
 
 /*  Queue via linked list  */
 class QueueLL
@@ -150,6 +241,8 @@ int main()
 {
   StackLL SLL;
   QueueLL QLL;
+  StackArr SAR;
+  QueueArr QAR;
   cout<<"\n \n****IMPLEMENTING STACK AND QUEUE USING ARRAY AND LINKED LIST****";
   
   /*Checking for stack and queue by linked list*/
@@ -165,5 +258,20 @@ int main()
   QLL.display();
   QLL.dequeue();
   QLL.display();
+  
+  /*Checking for stack and queue by Array*/
+  SAR.push(12);
+  SAR.push(23);
+  SAR.push(34);
+  SAR.display();
+  SAR.pop();
+  SAR.display();
+  QAR.enqueue(12);
+  QAR.enqueue(23);
+  QAR.enqueue(34);
+  QAR.display();
+  QAR.dequeue();
+  QAR.display();
+  
   return 0;
 }
