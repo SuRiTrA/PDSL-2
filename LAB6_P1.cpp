@@ -206,8 +206,10 @@ int main()
     l1.insert(62);
     l1.insert(70);
     l1.insert(97);
-    
-    //l1.sort();
+    //l1.sort()
+	
+    cout<<"\n \nEXECUTING TEST CODE FOR LINKED LIST";    
+   
     int pos2=binSrcLL(l1, 51);
         if(pos2==-1)
     {
