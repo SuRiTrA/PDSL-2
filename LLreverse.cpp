@@ -21,7 +21,7 @@ class SLL
    void insert(int n);
    Node* getNode(Node* h, int pos);
    void reverseNode(Node* h);
-   void display();
+   void display(Node* h);
    void reverseOn(Node* h);
 };
 
@@ -67,9 +67,9 @@ void SLL::reverseNode(Node* h)
    }   
 }
 
-void SLL::display()
+void SLL::display(Node* h)
 {
-   Node* tmp=head;
+   Node* tmp=h;
    cout<<"\n";
    while(tmp!=NULL)
    {
@@ -82,7 +82,7 @@ void SLL::display()
 void SLL::reverseOn(Node* head)
 {
    Node* prev=head;
-   Node* cur=head->next;
+   Node* cur=head->next;                  ;
    Node* t;
    if(size>1)
    {
@@ -96,6 +96,7 @@ void SLL::reverseOn(Node* head)
    cur->next=prev;
    head->next=NULL;
    head=cur;
+   display(head);
    } 
 }
      
@@ -107,11 +108,10 @@ int main()
    sll.insert(3);
    sll.insert(4);
    sll.insert(5);
-   sll.display();
+   sll.display(sll.head);
    //sll.reverseNode(sll.head);
    //sll.display();
    sll.reverseOn(sll.head);
-   sll.display();
    return 0;
 }
      
