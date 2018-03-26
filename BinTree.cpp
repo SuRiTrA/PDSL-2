@@ -29,7 +29,7 @@ class bTree
    }
    else
    {
-   if(v->data>data)
+   if(v->data>=data)
    {
      if(v->left!=NULL)
      {
@@ -61,22 +61,35 @@ void display(node* v)
    }
    display(v->left);
    cout<<v->data<<"\t";
-    display(v->right);
+   display(v->right);
  }
+
+
+void deletenode()
+{
+
+}
+
+void searchnode()
+{
+
+}
+
+
 };
-
-
-
-
-
 
 int main()
 {
    bTree BT;
-   BT.insert(BT.root,7);
-   BT.insert(BT.root,3);
-   BT.insert(BT.root,9);
-   BT.insert(BT.root,10); 
+   int n;
+   cout<<"\n \nEnter the number of entries you want to enter: ";
+   cin>>n;
+   for(int i=0;i<n;i++)
+   { cout<<"\nDATA "<<(i+1)<<": ";
+     int num=0;
+     cin>>num;
+     BT.insert(BT.root,num);
+   }
    BT.display(BT.root);
    return 0;
 }
