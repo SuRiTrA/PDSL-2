@@ -125,13 +125,21 @@ void deletenode(int key, node* v)
     }
    if(maxleft->left==NULL)
    {
-     node* par=maxleft->parent;
-     par->right=NULL;
      v->data=maxleft->data;
+     node* par=maxleft->parent;
+     if(par->left==maxleft)
+        par->left=NULL;
+     else
+        par->right=NULL;
    }
    else
    {
-     if(maxleft->left
+     v->data=maxleft->data;
+     node* par=maxleft->parent;
+     if(par->left==maxleft)
+        par->left=maxleft->left;
+     else
+        par->right=maxleft->left;
    }
   }
 }
@@ -181,6 +189,7 @@ int main()
    cin>>n;
    node* x3=BT.searchnode(BT.root,n);
    BT.deletenode(n,x3);
+   cout<<"\n";
    BT.display(BT.root);
    return 0;
 }
