@@ -95,6 +95,12 @@ void deletenode(int key, node* v)
   }
   else if((v->left==NULL || v->right==NULL ))
    {
+       
+       
+       
+       
+    if(v!=root)
+    {
      node* par;
      node* schild;
      par=v->parent; 
@@ -113,7 +119,17 @@ void deletenode(int key, node* v)
        par->right=schild;
        schild->parent=par;
      }
-    delete v;
+    }
+    else
+    {
+        if(v->left==NULL)
+          root=v->right;
+        else
+          root=v->left;
+    }
+     
+     
+     
    }
   else
   {
@@ -123,6 +139,7 @@ void deletenode(int key, node* v)
     {
       maxleft=maxleft->right;
     }
+    
    if(maxleft->left==NULL)
    {
      v->data=maxleft->data;
@@ -141,9 +158,21 @@ void deletenode(int key, node* v)
      else
         par->right=maxleft->left;
    }
+
   }
 }
 
+void rangesrc(node* v,int low, int upp)
+  {  
+   if(v==NULL)
+   {
+     return;
+   }
+   rangesrc(v->left,low,upp);
+   if(v->data>=low && v->data<=upp)
+     cout<<v->data<<"\t";
+   rangesrc(v->right,low,upp);
+ }
 
 node* searchnode(node* v, int data)
 {
@@ -191,5 +220,12 @@ int main()
    BT.deletenode(n,x3);
    cout<<"\n";
    BT.display(BT.root);
+   cout<<"\n \nEnter the lower limit for range search: ";
+   int l;
+   cin>>l;
+   cout<<"\nEnter the upper limit for range search: ";
+   int u;
+   cin>>u;
+   BT.rangesrc(BT.root,l,u);
    return 0;
 }
