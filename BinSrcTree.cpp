@@ -94,11 +94,7 @@ void deletenode(int key, node* v)
     
   }
   else if((v->left==NULL || v->right==NULL ))
-   {
-       
-       
-       
-       
+   {   
     if(v!=root)
     {
      node* par;
@@ -127,9 +123,6 @@ void deletenode(int key, node* v)
         else
           root=v->left;
     }
-     
-     
-     
    }
   else
   {
