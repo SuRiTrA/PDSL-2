@@ -19,8 +19,14 @@ class bsTree
 {
    public:
    node* root=NULL;
-
-
+   int bstsize, leaf, internal,rsrc;
+   bsTree()
+   {
+     bstsize=0;
+     leaf=0;
+     internal=0;
+     rsrc=0;
+   }
 void insert(node* v, int data)
 { 
    node* temp=new node;
@@ -55,7 +61,7 @@ void insert(node* v, int data)
        temp->parent=v;
      } 
    }
- }
+   }
 }
 
 
@@ -156,14 +162,17 @@ void deletenode(int key, node* v)
 }
 
 void rangesrc(node* v,int low, int upp)
-  {  
+{  
    if(v==NULL)
    {
      return;
    }
    rangesrc(v->left,low,upp);
    if(v->data>=low && v->data<=upp)
-     cout<<v->data<<"\t";
+    {
+      cout<<v->data<<"\t";
+      rsrc++;
+    }
    rangesrc(v->right,low,upp);
  }
 
@@ -188,6 +197,22 @@ else
   return NULL;
 }
 }
+
+void size(node* v)
+{  
+   if(v==NULL)
+   {
+     return;
+   }
+   size(v->left);
+   if(v->left==NULL && v->right==NULL) 
+     leaf++;
+   else
+     internal++;
+   bstsize++;
+   size(v->right);
+}
+
 };
 
 int main()
@@ -207,6 +232,8 @@ int main()
    cin>>n;   
    node* x1=BT.searchnode(BT.root,n);
    cout<<"\n \n";
+   BT.size(BT.root);
+   cout<<"\nThe total number of internal node: "<<BT.internal<<"\nThe total number of external(leaf) node: "<<BT.leaf<<"\nThe total number of nodes in the binary search tree: "<<BT.bstsize;
    cout<<"\n \nEnter the node to be deleted: ";
    cin>>n;
    node* x3=BT.searchnode(BT.root,n);
@@ -220,5 +247,6 @@ int main()
    int u;
    cin>>u;
    BT.rangesrc(BT.root,l,u);
+   cout<<"\n \nThe total number of elements in the range search is: "<<BT.rsrc;
    return 0;
 }
