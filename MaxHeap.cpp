@@ -1,6 +1,12 @@
 #include<iostream>
 using namespace std;
 
+//1711140
+//Suritra Bandyopadhyay
+//XD
+//Beware of copying >_>
+
+//maxheap class, using array
 
 
 class MaxHeap
@@ -13,9 +19,13 @@ class MaxHeap
     size=0;
   }
 
+//1711140
+//Suritra Bandyopadhyay
+//XD
+//Beware of copying >_>
 
 
-
+  //insert function inserts the element at the end,and then reheapifies it upwards
   void insert(int key)
   {
   int i=size++;
@@ -35,9 +45,12 @@ class MaxHeap
    }
   }
 
+//1711140
+//Suritra Bandyopadhyay
+//XD
+//Beware of copying >_>
 
-
-
+  //displays the array as it should be, since elements are arranged adhering to the properties of maximum heap
   void display()
   {
    cout<<"\nTHE MAX-HEAP ELEMENTS ARE:";
@@ -48,7 +61,7 @@ class MaxHeap
   }
 
 
-
+ //takes into consideration three cases, size=0, size=1, and size greater than 1
   void remove()   //remove maximum element (i.e., root element)
   {
   if(size==0)
@@ -59,13 +72,19 @@ class MaxHeap
   {
     size--;
   }
+    
+  //when size>1
   else
   {
     int i=0;
     maxheap[i]=maxheap[size-1];
     size--;
+    
+    //if the current node has a children
     while((2*i+1)+1<=size)
     {
+       
+      //if it has two children
       if((2*i+2)+1<=size)
       {
         int lc=maxheap[2*i+1];
@@ -80,6 +99,8 @@ class MaxHeap
         }
         
       }
+      
+      //if it has only one child
       else
       {
         if(maxheap[i]<maxheap[2*i+1])
@@ -97,6 +118,11 @@ class MaxHeap
  }
 };
 
+
+//1711140
+//Suritra Bandyopadhyay
+//XD
+//Beware of copying >_>
 
 
 int main()
@@ -118,3 +144,9 @@ int main()
   MH.display();
   return 0;
 }
+
+
+//1711140
+//Suritra Bandyopadhyay
+//XD
+//Beware of copying >_>
