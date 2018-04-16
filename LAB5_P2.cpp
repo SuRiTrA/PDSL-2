@@ -68,7 +68,13 @@ public:
     //and sepaprates the array into two halves, returning the index of the new position of pivot
     
     //1711140
-    
+     node *getTail(node *cur)
+ {
+    while (cur != NULL && cur->next != NULL)
+        cur = cur->next;
+    return cur;
+ }
+ 
 int arrangeARR(int *arr,int l,int r)
 {
     int pivot=arr[r];
@@ -120,7 +126,7 @@ int testarr()
     return 0;
 }
 
-node *arrangeLL(node *head, node *end, node *newHead, node *newEnd)
+node *arrangeLL(node *head, node *end, node **newHead, node **newEnd)
 {
     node *pivot = end;
     node *prev = NULL, *cur = head, *tail = pivot;
@@ -139,8 +145,8 @@ node *arrangeLL(node *head, node *end, node *newHead, node *newEnd)
             First node that has a value less than the pivot - becomes
             the new head
             */
-            if (newHead == NULL)
-                newHead = cur;
+            if (*newHead == NULL)
+                *newHead = cur;
             prev = cur;  
             cur = cur->next;
         }
@@ -150,7 +156,7 @@ node *arrangeLL(node *head, node *end, node *newHead, node *newEnd)
              If cur node is greater than pivot
              Move cur node to next of tail, and change tail
             */
-            if (prev!=NULL)
+            if (prev)
                 prev->next = cur->next;
             node *tmp = cur->next;
             cur->next = NULL;
@@ -161,11 +167,11 @@ node *arrangeLL(node *head, node *end, node *newHead, node *newEnd)
     }
     // If the pivot data is the smallest element in the current list,
     // pivot becomes the head
-    if (newHead == NULL)
-        newHead = pivot;
+    if (*newHead == NULL)
+        *newHead = pivot;
  
    
-    newEnd = tail;
+   *newEnd = tail;
     return pivot;
 }
 
@@ -183,35 +189,58 @@ node *quickSortLL(node *head, node *tail)
     
     */
  
-    node *newh = NULL, *newt = NULL;
-    node *pivot = arrangeLL(head, tail, newh, newt);
+    node *newHead = NULL, *newEnd = NULL;
+    node *pivot = arrangeLL(head, tail, &newHead, &newEnd);
     /*
      If pivot is the smallest element - no need to recur for
      the left part.
     */
-    if (newh != pivot)
+    if (newHead != pivot)
     {
         
-        node *tmp = newh;
+        node *tmp = newHead;
         while (tmp->next != pivot)
             tmp = tmp->next;
         tmp->next = NULL;
  
         
-        newh = quickSortLL(newh, tmp);
+        newHead = quickSortLL(newHead, tmp);
  
         //Since I had already broken the list, so re-linking the list once again
-        node* c=newh;
-        while (c != NULL && c->next != NULL)
-          c = c->next;
-        tmp=c;
+        
+        tmp=getTail(newHead);
         tmp->next =  pivot;
     }
-    pivot->next = quickSortLL(pivot->next, newt);
-    return newh;
+    pivot->next = quickSortLL(pivot->next, newEnd);
+    return newHead;
 }
 
+ void quickSort(node **headRef, node **tailRef)
+{
+    (*headRef) = quickSortLL(*headRef, *tailRef);
+    return;
+}
 };
+int main()
+{
+ //implementing the quick sort functions
+ QUICKSORT obj;
+ linkedList obj2;
+ obj2.addNode(5);
+ obj2.addNode(3);
+ obj2.addNode(6);
+ obj2.addNode(1);
+ obj2.addNode(2);
+ obj2.addNode(7);
+ obj2.addNode(9);
+ obj2.addNode(8);
+ obj2.addNode(4);
+ cout<<"The linked list is\n";
+ obj2.display();
+ cout<<"\n";
+ obj.quickSort(&obj2.head, &obj2.tail);
+ obj2.display();
+}
 
 
 
