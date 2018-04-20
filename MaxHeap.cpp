@@ -141,6 +141,7 @@ int main()
   }
   MH.display();
   MH.remove();
+  cout<<"\nDeletion Processing . . . !!!";
   MH.display();
   return 0;
 }
