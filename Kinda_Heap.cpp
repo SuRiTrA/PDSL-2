@@ -54,7 +54,7 @@ class Heap
             }
         }             
     }
-    void heapsort(int n)
+    void heapsort(int *arr, int n)
     {
         //creating a heap from the array
         for(int i=(n-1)/2;i>=0;i--)
@@ -65,9 +65,9 @@ class Heap
         //heapsorting
         for(int i=n-1;i>=0;i--)
         {
-            int temp=heap[0];
-            heap[0]=heap[i];
-            heap[i]=temp;
+            int temp=*arr;
+            *arr=*(arr+i);
+            *(arr+i)=temp;
             heapify(0);
         }
         
@@ -93,7 +93,7 @@ int main()
     hp.insert();
     hp.insert();
     hp.insert();
-    hp.heapsort(hp.size);
+    hp.heapsort(hp.heap, hp.size);
     hp.display();
     return 0;
 }
