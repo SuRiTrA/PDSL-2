@@ -68,8 +68,8 @@ void CLL::insert(int n)
 
 
 /*
-   It includes the position at which the insertion happens. Positioning starts with 1.  
-   Example: insertAt(1, 3)inserts 3 at the first position. 
+   It includes the position at which the insertion happens. Positioning starts with 0.  
+   Example: insertAt(0, 3)inserts 3 at the first position. 
 	    It should print a statement “Linked List does not have that many elements” if the position does not exist in the linked list.
 */ 
 void CLL::insertAt(int position, int num)
